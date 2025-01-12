@@ -60,19 +60,19 @@ fi
 if [ "$1" == "yarn" ]
 then
     flag="--master yarn --num-executors 8 --driver-memory 4g --queue urgent"
+    hdfs dfs -rm -r dfCitas.parquet dfInfo.parquet p2out p3out p4out p5out
+    hdfs dfs -put cite75_99.txt apat63_99.txt
 else
     flag="--master local[*] --driver-memory 4g"
+    rm -rf dfCitas.parquet dfInfo.parquet p2out p3out p4out p5out
 fi
-
-# Remove previous results
-rm -rf dfCitas.parquet dfInfo.parquet p2out p3out p4out p5out
 
 # Run the exercises, beware, you will need a lot of ram!
 #Hide the output of the spark-submit command
 echo "Running the exercise 1"
 spark-submit $flag p1.py cite75_99.txt apat63_99.txt dfCitas.parquet dfInfo.parquet
 echo "Running the exercise 2"
-spark-submit $flag p2.py dfCitas.parquet/ dfInfo.parquet/ country_codes.txt p2out
+spark-submit $flag p2.py dfCitas.parquet/ dfInfo.parquet/ ./country_codes.txt p2out
 echo "Running the exercise 3"
 spark-submit $flag p3.py apat63_99.txt p3out
 echo "Running the exercise 4"

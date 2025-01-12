@@ -58,5 +58,8 @@ spark-submit --master local[*] --driver-memory 4g p5.py dfInfo.parquet/ p5out
 ## Script to do everything
 
 ```bash
+git clone git@github.com:TretornESP/HPCN-PySpark.git
+cd HPCN-PySpark
+chmod +x run.sh
 ./run.sh [local|yarn]
 ```
