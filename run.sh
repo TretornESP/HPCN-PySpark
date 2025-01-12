@@ -60,7 +60,7 @@ fi
 if [ "$1" == "yarn" ]
 then
     flag="--master yarn --num-executors 8 --driver-memory 4g --queue urgent"
-    hdfs dfs -rm -r dfCitas.parquet dfInfo.parquet p2out p3out p4out p5out
+    hdfs dfs -rm -r dfCitas.parquet dfInfo.parquet p2out p3out p4out p5out apat63_99.txt cite75_99.txt
     hdfs dfs -put apat63_99.txt
     hdfs dfs -put cite75_99.txt
 else
@@ -80,4 +80,17 @@ echo "Running the exercise 4"
 spark-submit $flag p4.py dfCitas.parquet/ dfInfo.parquet/ ES,FR p4out
 echo "Running the exercise 5"
 spark-submit $flag p5.py dfInfo.parquet/ p5out
-echo "All exercises have been run"
+echo "All exercises have been run, getting the output"
+
+if [ "$1" == "yarn" ]
+then
+    hdfs dfs -ls
+    hdfs dfs -get dfCitas.parquet
+    hdfs dfs -get dfInfo.parquet
+    hdfs dfs -get p2out
+    hdfs dfs -get p3out
+    hdfs dfs -get p4out
+    hdfs dfs -get p5out
+fi
+
+echo "The output is in the folders dfCitas.parquet, dfInfo.parquet, p2out, p3out, p4out and p5out"
