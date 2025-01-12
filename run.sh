@@ -61,7 +61,8 @@ if [ "$1" == "yarn" ]
 then
     flag="--master yarn --num-executors 8 --driver-memory 4g --queue urgent"
     hdfs dfs -rm -r dfCitas.parquet dfInfo.parquet p2out p3out p4out p5out
-    hdfs dfs -put cite75_99.txt apat63_99.txt
+    hdfs dfs -put apat63_99.txt
+    hdfs dfs -put cite75_99.txt
 else
     flag="--master local[*] --driver-memory 4g"
     rm -rf dfCitas.parquet dfInfo.parquet p2out p3out p4out p5out
