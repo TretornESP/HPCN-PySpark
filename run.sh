@@ -91,6 +91,8 @@ then
     hdfs dfs -get p3out
     hdfs dfs -get p4out
     hdfs dfs -get p5out
+    echo "Cleaning up HDFS"
+    hdfs dfs -rm -r dfCitas.parquet dfInfo.parquet p2out p3out p4out p5out apat63_99.txt cite75_99.txt
 fi
 
 echo "The output is in the folders dfCitas.parquet, dfInfo.parquet, p2out, p3out, p4out and p5out"
